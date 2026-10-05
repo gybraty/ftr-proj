@@ -1,0 +1,3 @@
+export const SERVICE_NAME = "SERVICE_NAME";
+export const READINESS_CHECK = "READINESS_CHECK";
+export const CACHE_RESET_HOOK = "CACHE_RESET_HOOK";

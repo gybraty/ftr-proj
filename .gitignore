@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.log
+.env
+experiments/results/*
+!experiments/results/samples/
+
+# local planning docs, not for GitHub
+docs/superpowers/
+.superpowers/
+
+# local docs, not for GitHub
+report/
+docs/diagrams/

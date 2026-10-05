@@ -1,0 +1,18 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: ftr
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - { containerPort: 30080, hostPort: 30080 }
+      - { containerPort: 30081, hostPort: 30081 }
+      - { containerPort: 30001, hostPort: 30001 }
+      - { containerPort: 30002, hostPort: 30002 }
+      - { containerPort: 30003, hostPort: 30003 }
+      - { containerPort: 30004, hostPort: 30004 }
+      - { containerPort: 30432, hostPort: 30432 }
+      - { containerPort: 30090, hostPort: 30090 }
+      - { containerPort: 30500, hostPort: 30500 }
+  - role: worker
+  - role: worker
+  - role: worker

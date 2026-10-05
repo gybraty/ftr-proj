@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "rootDir": "src", "outDir": "dist", "types": ["node", "jest"], "lib": ["ES2022", "DOM"] },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.spec.ts", "src/fake-db.ts"]
+}

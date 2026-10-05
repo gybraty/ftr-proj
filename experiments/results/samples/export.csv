@@ -1,0 +1,13 @@
+runId,scenario,ft,detection_ms,recovery_ms,total_requests,failed_requests,availability_pct,duplicate_payments,inconsistent_payments,impact_observed
+app-crash-baseline-2026-10-05T11-31-38.741Z,app-crash,false,564,2131,3772,35,99.07,194,14,true
+app-crash-ft-2026-10-05T11-33-51.726Z,app-crash,true,,,3760,0,100.00,0,0,false
+corrupted-tx-baseline-2026-10-05T11-50-27.045Z,corrupted-tx,false,553,1922,4720,13,99.72,235,1,true
+corrupted-tx-ft-2026-10-05T11-53-08.251Z,corrupted-tx,true,542,,4696,0,100.00,0,0,false
+db-failure-baseline-2026-10-05T11-36-11.952Z,db-failure,false,555,,3433,2493,27.38,2,8,true
+db-failure-ft-2026-10-05T11-38-37.062Z,db-failure,true,556,1608,3781,80,97.88,0,0,true
+high-load-baseline-2026-10-05T11-55-58.552Z,high-load,false,,,18883,0,100.00,1401,0,false
+high-load-ft-2026-10-05T11-58-09.806Z,high-load,true,,,18850,0,100.00,0,0,false
+network-timeout-baseline-2026-10-05T11-41-10.848Z,network-timeout,false,,,3706,0,100.00,81,31,false
+network-timeout-ft-2026-10-05T11-43-22.215Z,network-timeout,true,,16551,3755,5,99.87,0,0,true
+node-failure-baseline-2026-10-05T11-45-46.196Z,node-failure,false,2561,901,3790,527,86.09,178,0,true
+node-failure-ft-2026-10-05T11-47-58.754Z,node-failure,true,2565,174,3791,7,99.82,0,0,true

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-service
+  namespace: university
+  labels: { app: student-service, ftr-chaos-target: "true" }
+spec:
+  selector: { matchLabels: { app: student-service } }
+  template:
+    metadata:
+      labels: { app: student-service, ftr-chaos-target: "true" }
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3001"
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: student-service
+          image: ftr/student-service:dev
+          imagePullPolicy: IfNotPresent
+          ports: [{ containerPort: 3001 }]
+          env:
+            - { name: PORT, value: "3001" }
+            - { name: DATABASE_URL, value: "postgres://ftr:ftr@postgres.university.svc:5432/university" }
+            - { name: FT_MODE, value: "on" }
+            - { name: RECORDS_URL, value: "http://records-service.university.svc:3003" }
+            - name: CHAOS_TOKEN
+              valueFrom: { secretKeyRef: { name: chaos-token, key: token } }
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+          livenessProbe:
+            httpGet: { path: /health, port: 3001 }
+            periodSeconds: 5
+            failureThreshold: 2
+          readinessProbe:
+            httpGet: { path: /ready, port: 3001 }
+            periodSeconds: 3
+            failureThreshold: 2
+---
+apiVersion: v1
+kind: Service
+metadata: { name: student-service, namespace: university }
+spec:
+  type: NodePort
+  selector: { app: student-service }
+  ports: [{ port: 3001, targetPort: 3001, nodePort: 30001 }]
